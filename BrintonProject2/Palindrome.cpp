@@ -116,8 +116,12 @@ public:
 				char temp;
 				temp = this->palindrome[count];
 				testPalindrome.push_back(temp);
-				testPalindrome[count] = tolower(testPalindrome[count]);
 			}
+		}
+		length = testPalindrome.length();
+		for (int count = 0; count < length; count++)
+		{
+			testPalindrome[count] = tolower(testPalindrome[count]);
 		}
 		cout << testPalindrome; //Remove
 		return true;
