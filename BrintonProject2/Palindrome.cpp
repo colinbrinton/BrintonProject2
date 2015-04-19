@@ -105,11 +105,17 @@ public:
 
 	bool isPalindrome()
 	{
+		const int ONE = 1;
+		const int TWO = 2;
+
 		string testPalindrome = "";
+		string compare1 = "";
+		string compare2 = "";
+
 		getline(cin, palindrome); //Remove
 		int length = palindrome.length();
 		//testPalindrome.resize(length);
-		for (int count = 0; count < length; count++)
+		for (int count = NULL; count < length; count++)
 		{
 			if (isalpha(this->palindrome[count]))
 			{
@@ -118,13 +124,43 @@ public:
 				testPalindrome.push_back(temp);
 			}
 		}
+
 		length = testPalindrome.length();
-		for (int count = 0; count < length; count++)
-		{
+		for (int count = NULL; count < length; count++)
 			testPalindrome[count] = tolower(testPalindrome[count]);
+
+		if (length % TWO != NULL)
+		{
+			int half = (length - ONE) / TWO;
+
+			compare1.resize(half);
+			compare2.resize(half);
+
+			for (int count = NULL; count < half; count++)
+				compare1[count] = testPalindrome[count];
+			/*for (int count = half; count < half; count++)
+				compare2[count] = testPalindrome[count];*/
+
+			int index = 0;
+			for (int count = (length - ONE); count > half; count--)
+			{
+				compare2[index] = testPalindrome[count];
+				++index;
+			}
 		}
+		else
+		{
+
+		}
+
 		cout << testPalindrome; //Remove
-		return true;
+		cout << endl << compare1;
+		cout << endl << compare2;
+
+		if (compare2 == compare1)
+			return true;
+		else
+			return false;
 	}
 };
 
