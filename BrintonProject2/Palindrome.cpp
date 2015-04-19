@@ -150,6 +150,22 @@ public:
 		}
 		else
 		{
+			int half = (length / TWO);
+
+			compare1.resize(half);
+			compare2.resize(half);
+
+			for (int count = NULL; count < half; count++)
+				compare1[count] = testPalindrome[count];
+			/*for (int count = half; count < half; count++)
+			compare2[count] = testPalindrome[count];*/
+
+			int index = 0;
+			for (int count = (length - ONE); count >= half; count--)
+			{
+				compare2[index] = testPalindrome[count];
+				++index;
+			}
 
 		}
 
@@ -175,7 +191,10 @@ public:
 
 	 Pstring test;
 
-	 test.isPalindrome();
+	 if (test.isPalindrome())
+		 cout << endl << "YES!";
+	 else
+		 cout << endl << "nope...";
 
 	// This prevents the Console Window from closing during debug mode using
 	// the Visual Studio IDE.
