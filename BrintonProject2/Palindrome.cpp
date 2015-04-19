@@ -51,6 +51,7 @@
 #include "stdafx.h"  // Defines IDE required external definition files
 #include <iostream>  // Defines objects and classes used for stream I/O
 #include <string>    // Needed to use strings
+#include <thread>    // Needed for sleep
 
 // Namespaces utilized in this program
 using namespace std; // Announces to the compiler that members of the namespace
@@ -101,7 +102,10 @@ public:
 	{
 		palindrome = "";
 	}
-	Pstring(string palindrome) : string(palindrome) { }
+	Pstring(string palindrome) : string(palindrome) 
+	{
+		this->palindrome = palindrome;
+	}
 
 	bool isPalindrome()
 	{
@@ -112,7 +116,13 @@ public:
 		string compare1 = "";
 		string compare2 = "";
 
-		getline(cin, palindrome); //Remove
+		if (palindrome.empty())
+		{
+			cout << "Error: No input received.";
+			return false;
+		}
+
+		//getline(cin, palindrome); //Remove
 		int length = palindrome.length();
 		//testPalindrome.resize(length);
 		for (int count = NULL; count < length; count++)
@@ -167,11 +177,11 @@ public:
 				++index;
 			}
 
-		}
+		};
 
-		cout << testPalindrome; //Remove
+		cout << endl << testPalindrome;
 		cout << endl << compare1;
-		cout << endl << compare2;
+		cout << endl << compare2 << endl;
 
 		if (compare2 == compare1)
 			return true;
@@ -185,16 +195,32 @@ public:
 	 // Constant "const" Vlaue Declarations
 	 const int NO_ERRORS = 0;
 
-	 
+	 char repeat;
+	 cout << "This program determines if a word or phrase is a palindrome." << endl;
+	 do{
+		 cout << "Please enter a word or phrase that you would like to have tested:" << endl;
+		 string palindrome;
+		 getline(cin, palindrome);
+		 while (palindrome.empty())
+		 {
+			 cout << "Nothing was entered..." << endl;
+			 cout << "Please enter a word or phrase that you would like to have tested:" << endl;
+			 getline(cin, palindrome);
+		 }
+		 Pstring test(palindrome);
 
-	// !! Insert your code here (remove this comment line) !!
+		 if (test.isPalindrome())
+			 cout << endl << "Result: Your word or phrase is a palindrome!" << endl << endl;
+		 else
+			 cout << endl << "Result: No palindrome detected." << endl << endl;
 
-	 Pstring test;
+		 cout << "Would you like to test another word or phrase? (Y/N) " << endl;
+		 cin >> repeat;
+		 cin.ignore();
+		 if ((repeat == 'Y') || (repeat == 'y'))
+			 cout << endl;
 
-	 if (test.isPalindrome())
-		 cout << endl << "YES!";
-	 else
-		 cout << endl << "nope...";
+	 } while ((repeat == 'Y' )|| (repeat == 'y'));
 
 	// This prevents the Console Window from closing during debug mode using
 	// the Visual Studio IDE.
