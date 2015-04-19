@@ -117,7 +117,7 @@ public:
 		//testPalindrome.resize(length);
 		for (int count = NULL; count < length; count++)
 		{
-			if (isalpha(this->palindrome[count]))
+			if (isalnum(this->palindrome[count]))
 			{
 				char temp;
 				temp = this->palindrome[count];
