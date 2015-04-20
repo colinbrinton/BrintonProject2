@@ -87,7 +87,7 @@ using namespace std; // Announces to the compiler that members of the namespace
 * Pstring(string const)			 Constructor accepting input string, utilizes string's
 *									base constructor
 * bool isPalindrome() const		 Determins if string is palindrome, will process uppercase
-*								 and lowercase letters, numbers, spaces and symbols returns 
+*								 and lowercase letters, numbers, spaces and symbols. Returns 
 *								 true or false. Displays intermediate steps used in algorithm
 *								 (console output may be commented out for use in other applications)
 *
@@ -135,7 +135,7 @@ public:
 	}
 
 	//    B. Initializing Constructors
-	Pstring(const string palindrome) : string(palindrome)
+	Pstring(const string palindrome) : string(palindrome)    //Use string base constructor
 	{
 		this->palindrome = palindrome;
 	}
@@ -146,57 +146,82 @@ public:
 	// 3. Observer Methods
 	bool isPalindrome() const
 	{
+		// Initialize strings for processing and comparison
 		string testPalindrome = "";
 		string compare1 = "";
 		string compare2 = "";
 
+		// Input validation (input also validated in main()
+		//    this should never be seen in this program)
 		if (palindrome.empty())
 		{
 			cout << "Error: No input received.";
 			return false;
 		}
+
+		// Find the length of the string entered
 		int length = palindrome.length();
+
+		// Scan through the full string
 		for (int count = NULL; count < length; count++)
 		{
+			// Check to see if current element is alphanumerical
+			//		with goal of distiling text down to only letters
+			//      with no spaces (numbers ok)
 			if (isalnum(this->palindrome[count]))
 			{
+				// If element is alphanumerical store in testPalindrome
 				char temp;
 				temp = this->palindrome[count];
 				testPalindrome.push_back(temp);
 			}
 		}
 
+		//Find the length of the processed text
 		length = testPalindrome.length();
+
+		//Make all charecters lowercase
 		for (int count = NULL; count < length; count++)
 			testPalindrome[count] = tolower(testPalindrome[count]);
 
+		//If the string is an odd number, the middle element may be ignored
 		if (length % TWO != NULL)
 		{
+			//Half of the total length excluding middle element
 			int half = (length - ONE) / TWO;
 
+			//Set the size for the two comparison strings
 			compare1.resize(half);
 			compare2.resize(half);
 
+			//Store the first half of the charecters in compare1
 			for (int count = NULL; count < half; count++)
 				compare1[count] = testPalindrome[count];
 
-			int index = 0;
+			//Store the second half of the charecters in reverse order in compare2
+			int index = NULL;
 			for (int count = (length - ONE); count > half; count--)
 			{
 				compare2[index] = testPalindrome[count];
 				++index;
 			}
 		}
+
+		//String is an even number, length may be evenly divided
 		else
 		{
+			//Find length for half the elements
 			int half = (length / TWO);
 
+			//Set the size of the comparision strings
 			compare1.resize(half);
 			compare2.resize(half);
 
+			//Store first half of charecters in compare1
 			for (int count = NULL; count < half; count++)
 				compare1[count] = testPalindrome[count];
 
+			//Store the second half of the charecters in reverse order in compare2
 			int index = NULL;
 			for (int count = (length - ONE); count >= half; count--)
 			{
@@ -206,31 +231,35 @@ public:
 
 		}
 
+		//Display the content of the strings used in the algorithm.
+		//For demonstration purposes only, comment out if class is used for
+		//another application.
 		cout << endl << "Processed text               :  " << testPalindrome;
 		cout << endl << "First half of text           :  " << compare1;
 		cout << endl << "Second half of text reversed :  " << compare2 << endl;
 
+		//Compare the first half of the charecters to the revered second half
 		if (compare2 == compare1)
-			return true;
+			return true;   //If they match return true, the inputted text is a palindrome
 		else
-			return false;
-	}
-};
+			return false;  //If they do not match, the inputted text is not a palindrome
+	} // End of method
+}; //End of class
 
 /******************************************************************************
 * Method: main()
 *
 * Method Description
 * ------------------
-* ** For method main(), describe the application program from the client's
-* ** perspective, which includes any User inputs required and expected
-* ** Console output, and any other pertinent information about the program.
-* ** For other methods, describe the functionality of the method.
-* ** This WILL take several lines for a satisfactory description!
+* Program opens with a description of its functionality. Prompt is displayed to
+* enter a word or phrase to be tested. Input is validated to ensure something was
+* entered. If nothing is entered, reprompt. Program creates a Pstring object and 
+* tests object with isPalindrome() member function. Displays results of test.
+* User is prompted to repeat the program. Display exit text if no repeat is triggered.
 *
 * Pre-Conditions
 * --------------
-* ** Describe any assumptions made by the method; otherwise specify: None **
+* None
 *
 * Method Arguments
 * ----------------
@@ -247,8 +276,13 @@ public:
 *
 * Invoked Methods
 * ---------------
-*     Name                             Description
-* ------------  --------------------------------------------------------------
+*     Name                               Description
+* ------------    --------------------------------------------------------------
+* isPalindrome()   Member function of Pstring class.
+*				   Determins if string is palindrome, will process uppercase
+*				   and lowercase letters, numbers, spaces and symbols. Returns 
+*				   true or false. Displays intermediate steps used in algorithm
+*				   (console output may be commented out for use in other applications)
 *
 *******************************************************************************
 */
@@ -258,32 +292,48 @@ public:
 	 // Constant "const" Vlaue Declarations
 	 const int NO_ERRORS = 0;
 
+	 // Declare char variable to be used for repeat program prompt
 	 char repeat;
+
+	 // Program description
 	 cout << "This program determines if a word or phrase is a palindrome." << endl;
+
+	 //Outer do-while loop so that the user may test additional palindromes
 	 do{
+		 //Prompt to enter text
 		 cout << "Please enter a word or phrase that you would like to have tested:" << endl;
+
+		 //Store text in string
 		 string palindrome;
 		 getline(cin, palindrome);
+
+		 //Input validation and reprompt
 		 while (palindrome.empty())
 		 {
 			 cout << "Nothing was entered..." << endl;
 			 cout << "Please enter a word or phrase that you would like to have tested:" << endl;
 			 getline(cin, palindrome);
 		 }
+
+		 //Create Pstring object initialized with input string
 		 Pstring test(palindrome);
 
+		 //Using isPalindrome() return value, display one of two results
 		 if (test.isPalindrome())
 			 cout << endl << "Result: Your word or phrase is a palindrome!" << endl << endl;
 		 else
 			 cout << endl << "Result: No palindrome detected." << endl << endl;
 
+		 //Prompt to restart process
 		 cout << "Would you like to test another word or phrase? (Y/N) " << endl;
 		 cin >> repeat;
-		 cin.ignore();
+		 cin.ignore(); //Needed to avoid automatically entering '/0' in next iteration
+
+		 //Formatting
 		 if ((repeat == 'Y') || (repeat == 'y'))
 			 cout << endl;
 
-	 } while ((repeat == 'Y' )|| (repeat == 'y'));
+	 } while ((repeat == 'Y' )|| (repeat == 'y')); //Test user response
 
 	// This prevents the Console Window from closing during debug mode using
 	// the Visual Studio IDE.
