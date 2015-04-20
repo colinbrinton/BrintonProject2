@@ -1,7 +1,7 @@
 
 /******************************************************************************
  * Bellevue Class: PROG 113
- *           Term: Speing 2015
+ *           Term: Spring 2015
  *     Instructor: Robert Main
  *
  * Solution/Project Name: Project2
@@ -74,7 +74,7 @@ using namespace std; // Announces to the compiler that members of the namespace
 
 * Class Description
 * -----------------
-* This class accepts a user inputed string of any combination of letters, numbers, spaces
+* This class accepts a user inputted string of any combination of letters, numbers, spaces
 * and symbols or punctuation. The primary use for this class is calling the method isPalindrome()
 * which tests the string to determine if it is a palindrome.
 *
@@ -86,7 +86,7 @@ using namespace std; // Announces to the compiler that members of the namespace
 * ~Pstring()					 Class Destructor
 * Pstring(string const)			 Constructor accepting input string, utilizes string's
 *									base constructor
-* bool isPalindrome() const		 Determins if string is palindrome, will process uppercase
+* bool isPalindrome() const		 Determines if string is palindrome, will process uppercase
 *								 and lowercase letters, numbers, spaces and symbols. Returns 
 *								 true or false. Displays intermediate steps used in algorithm
 *								 (console output may be commented out for use in other applications)
@@ -166,7 +166,7 @@ public:
 		for (int count = NULL; count < length; count++)
 		{
 			// Check to see if current element is alphanumerical
-			//		with goal of distiling text down to only letters
+			//		with goal of distilling text down to only letters
 			//      with no spaces (numbers ok)
 			if (isalnum(this->palindrome[count]))
 			{
@@ -180,7 +180,7 @@ public:
 		//Find the length of the processed text
 		length = testPalindrome.length();
 
-		//Make all charecters lowercase
+		//Make all characters lowercase
 		for (int count = NULL; count < length; count++)
 			testPalindrome[count] = tolower(testPalindrome[count]);
 
@@ -194,11 +194,11 @@ public:
 			compare1.resize(half);
 			compare2.resize(half);
 
-			//Store the first half of the charecters in compare1
+			//Store the first half of the characters in compare1
 			for (int count = NULL; count < half; count++)
 				compare1[count] = testPalindrome[count];
 
-			//Store the second half of the charecters in reverse order in compare2
+			//Store the second half of the characters in reverse order in compare2
 			int index = NULL;
 			for (int count = (length - ONE); count > half; count--)
 			{
@@ -213,15 +213,15 @@ public:
 			//Find length for half the elements
 			int half = (length / TWO);
 
-			//Set the size of the comparision strings
+			//Set the size of the comparison strings
 			compare1.resize(half);
 			compare2.resize(half);
 
-			//Store first half of charecters in compare1
+			//Store first half of characters in compare1
 			for (int count = NULL; count < half; count++)
 				compare1[count] = testPalindrome[count];
 
-			//Store the second half of the charecters in reverse order in compare2
+			//Store the second half of the characters in reverse order in compare2
 			int index = NULL;
 			for (int count = (length - ONE); count >= half; count--)
 			{
@@ -279,7 +279,7 @@ public:
 *     Name                               Description
 * ------------    --------------------------------------------------------------
 * isPalindrome()   Member function of Pstring class.
-*				   Determins if string is palindrome, will process uppercase
+*				   Determines if string is palindrome, will process uppercase
 *				   and lowercase letters, numbers, spaces and symbols. Returns 
 *				   true or false. Displays intermediate steps used in algorithm
 *				   (console output may be commented out for use in other applications)
